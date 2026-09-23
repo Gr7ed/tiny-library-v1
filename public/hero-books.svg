@@ -1,0 +1,16 @@
+<svg width="800" height="640" viewBox="0 0 800 640" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">A stack of books</title>
+  <desc id="desc">Colorful books arranged in a stack beside a small plant.</desc>
+  <rect width="800" height="640" rx="32" fill="#F4F1EA"/>
+  <circle cx="620" cy="155" r="92" fill="#D9E8DC"/>
+  <path d="M615 276C615 208 634 171 670 136" stroke="#315C48" stroke-width="12" stroke-linecap="round"/>
+  <path d="M628 202C587 185 566 158 565 120C605 125 633 151 628 202Z" fill="#6D9B78"/>
+  <path d="M642 173C649 126 674 101 714 94C714 137 691 165 642 173Z" fill="#4E7E5C"/>
+  <rect x="162" y="421" width="468" height="68" rx="10" transform="rotate(-8 162 421)" fill="#9D3F42"/>
+  <rect x="151" y="350" width="480" height="72" rx="10" transform="rotate(5 151 350)" fill="#D48B44"/>
+  <rect x="184" y="278" width="436" height="72" rx="10" transform="rotate(-4 184 278)" fill="#315C48"/>
+  <rect x="208" y="474" width="426" height="22" rx="11" fill="#252525" fill-opacity=".14"/>
+  <rect x="218" y="404" width="118" height="10" rx="5" transform="rotate(5 218 404)" fill="#FFF8EA" fill-opacity=".75"/>
+  <rect x="258" y="338" width="145" height="10" rx="5" transform="rotate(-4 258 338)" fill="#FFF8EA" fill-opacity=".75"/>
+  <rect x="245" y="450" width="128" height="10" rx="5" transform="rotate(-8 245 450)" fill="#FFF8EA" fill-opacity=".75"/>
+</svg>

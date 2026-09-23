@@ -1,0 +1,23 @@
+export const bookCategories = [
+  "fiction",
+  "non-fiction",
+  "romance",
+  "fantasy",
+  "thriller",
+  "horror",
+  "historical",
+  "biography",
+  "self-help",
+] as const;
+
+export type BookCategory = (typeof bookCategories)[number];
+
+export type Book = {
+  id: number;
+  name: string;
+  author: string;
+  likes: number;
+  image: string;
+  category: BookCategory;
+  dateAdded: string;
+};
