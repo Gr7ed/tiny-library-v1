@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Lato, Nunito_Sans } from "next/font/google";
+import { headers } from "next/headers";
+import { Lato, Noto_Kufi_Arabic, Nunito_Sans } from "next/font/google";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { directionFor, type Locale } from "./i18n";
 import "./globals.css";
 
 const lato = Lato({
@@ -16,21 +18,35 @@ const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
 });
 
+const arabic = Noto_Kufi_Arabic({
+  variable: "--font-noto-kufi-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "600", "700"],
+});
+
 export const metadata: Metadata = {
   title: "Tiny Books",
   description: "A collection of tiny books",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const locale = (await headers()).get("x-locale") === "ar" ? "ar" : "en";
+  const activeLocale: Locale = locale;
+
   return (
     <html
-      lang="en"
-      className={`${lato.variable} ${nunitoSans.variable} h-full antialiased`}
+      lang={activeLocale}
+      dir={directionFor(activeLocale)}
+      className={`${lato.variable} ${nunitoSans.variable} ${arabic.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
-        <Header />
+      <body
+        className={`flex min-h-full flex-col bg-background text-foreground ${
+          activeLocale === "ar" ? "font-arabic" : ""
+        }`}
+      >
+        <Header locale={activeLocale} />
         <div className="w-full flex-1">{children}</div>
-        <Footer />
+        <Footer locale={activeLocale} />
       </body>
     </html>
   );

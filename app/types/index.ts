@@ -11,7 +11,9 @@ export const bookCategories = [
 ] as const;
 
 export type BookCategory = (typeof bookCategories)[number];
-
+export type CategoryPageProps = {
+  params: Promise<{ category: string }>;
+};
 export type Book = {
   id: number;
   name: string;

@@ -18,6 +18,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Languages and RTL
+
+The app supports English and Arabic through locale-prefixed routes:
+
+- English: `/en`
+- Arabic RTL: `/ar`
+
+Unprefixed routes redirect to the English equivalent. Use the language switcher in the header to keep the current page while changing language. The Arabic version translates interface copy and category labels while preserving the existing book titles, authors, and data.
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More
