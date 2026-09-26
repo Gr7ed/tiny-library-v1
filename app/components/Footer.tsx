@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,7 +16,12 @@ export function Footer({ locale }: { locale: Locale }) {
       : locale;
   const copy = getMessages(activeLocale);
   return (
-    <footer className="mt-16 border-t border-border bg-surface-muted ">
+    <footer
+      className={clsx(
+        "mt-16 border-t border-border bg-surface-muted",
+        activeLocale === "ar" && "font-arabic",
+      )}
+    >
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1fr_auto] lg:px-8 items-center-safe">
         <div className="flex flex-col gap-4">
           <Image src="/tinylibrary-logo.png" alt={copy.siteName} width={200} height={200} className="h-auto w-32" />

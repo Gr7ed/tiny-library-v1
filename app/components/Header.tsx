@@ -118,7 +118,7 @@ export function Header({ locale }: { locale: Locale }) {
     <header
       className={clsx(
         "sticky top-0 z-50 border-b border-border/80 bg-background/90 shadow-sm backdrop-blur-xl transition-[transform,opacity] duration-300",
-        activeLocale === "ar" && "font-(--font-arabic)",
+        activeLocale === "ar" && "font-arabic",
         isVisible || isMenuOpen
           ? "translate-y-0 opacity-100"
           : "pointer-events-none -translate-y-full opacity-0",
