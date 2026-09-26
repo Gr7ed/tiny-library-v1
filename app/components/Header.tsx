@@ -139,8 +139,9 @@ export function Header({ locale }: { locale: Locale }) {
                 <Image
                   src="/tinylibrary-logo.png"
                   alt="Tiny Library"
-                  width={112}
-                  height={28}
+                  width={200}
+                  height={200}
+                  className="h-auto w-28"
                   priority
                 />
               </Link>

@@ -54,8 +54,7 @@ export function getBooks(): Book[] {
 }
 
 export function getBookById(id: number | string): Book | undefined {
-  const numericId =
-    typeof id === "number" ? id : Number.parseInt(id.trim(), 10);
+  const numericId = typeof id === "number" ? id : Number(id.trim());
 
   if (!Number.isInteger(numericId)) {
     return undefined;

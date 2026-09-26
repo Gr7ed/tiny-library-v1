@@ -18,7 +18,7 @@ export function Footer({ locale }: { locale: Locale }) {
     <footer className="mt-16 border-t border-border bg-surface-muted ">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1fr_auto] lg:px-8 items-center-safe">
         <div className="flex flex-col gap-4">
-          <Image src="/tinylibrary-logo.png" alt={copy.siteName} width={128} height={32} />
+          <Image src="/tinylibrary-logo.png" alt={copy.siteName} width={200} height={200} className="h-auto w-32" />
           <p className="max-w-sm text-sm leading-6 text-muted">
             {activeLocale === "ar"
               ? "ركن صغير ومنتقًى بعناية للقراء الباحثين عن حكايتهم القادمة."
