@@ -4,6 +4,7 @@ import {
   type Book,
   type BookCategory,
 } from "../types";
+import { categoryLabel, type Locale } from "../i18n";
 
 const categories = new Set<string>(bookCategories);
 
@@ -68,4 +69,15 @@ export function getBooksByCategory(category: BookCategory): Book[] {
   return books
     .filter((book) => book.category === category)
     .map((book) => ({ ...book }));
+}
+
+export function searchBooks(items: Book[], query: string, locale: Locale): Book[] {
+  const normalizedQuery = query.trim().toLocaleLowerCase();
+  if (!normalizedQuery) return items;
+
+  return items.filter((book) =>
+    [book.name, book.author, categoryLabel(locale, book.category)].some((value) =>
+      value.toLocaleLowerCase().includes(normalizedQuery),
+    ),
+  );
 }

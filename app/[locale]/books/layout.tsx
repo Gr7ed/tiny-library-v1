@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { BooksSearch } from "@/app/components/BooksSearch";
 import { BooksNavigation } from "@/app/components/BooksNavigation";
 import { isLocale, type Locale } from "@/app/i18n";
 
@@ -13,7 +14,12 @@ export default async function LocaleBooksLayout({
   return (
     <main className="mx-auto grid min-w-0 max-w-7xl grid-cols-1 px-4 py-4 sm:px-6 sm:py-8 md:py-12 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12 lg:px-8">
       <BooksNavigation locale={locale} />
-      <div className="min-w-0">{children}</div>
+      <div className="min-w-0">
+        <div className="sticky top-25 z-20 -mx-4 mb-7  px-4 backdrop-blur sm:-mx-6 sm:px-6 lg:top-0 md:top-30 lg:mx-0 lg:px-0">
+          <BooksSearch locale={locale} />
+        </div>
+        {children}
+      </div>
     </main>
   );
 }
