@@ -26,7 +26,7 @@ export function BookCard({ book, locale = "en" }: { book: Book; locale?: Locale 
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-3 p-4 sm:p-5">
         <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-muted sm:text-sm">
-          <span className="min-w-0 wrap-break-word">by {book.author}</span>
+          <span className="min-w-0 wrap-break-word">{locale === "ar" ? "بقلم" : "by"} {book.author}</span>
           <span className="inline-flex shrink-0 items-center gap-1">
             <FiHeart aria-hidden="true" className="text-accent" /> {book.likes}
           </span>
