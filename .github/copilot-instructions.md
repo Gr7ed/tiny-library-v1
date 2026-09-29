@@ -39,3 +39,7 @@ There is no test script, test framework, or test-file convention configured in `
 - Explicitly align flex and grid containers, keep normal body text left-aligned, and preserve WCAG AA contrast.
 - All interactive elements need visible high-contrast `focus-visible` outlines. Preserve the existing focus-ring pattern when adding links, buttons, or controls.
 - Keep the visual system to the configured Lato primary font and Nunito Sans supporting font; do not add additional typefaces without updating the shared font configuration.
+
+## Required context
+
+Before making UI or styling changes, read `app/STYLING.md` and follow its rules.

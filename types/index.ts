@@ -23,3 +23,11 @@ export type Book = {
   category: BookCategory;
   dateAdded: string;
 };
+
+export type BooksPage = {
+  items: Book[];
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+};

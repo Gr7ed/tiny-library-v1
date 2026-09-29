@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FiHeart, FiArrowUpRight } from "react-icons/fi";
+import { FiHeart } from "react-icons/fi";
 import { Card } from "@/components/ui/card";
-import { categoryLabel, getMessages, localizedPath, type Locale } from "@/lib/i18n";
+import { categoryLabel, localizedPath, type Locale } from "@/lib/i18n";
 import type { Book } from "@/types";
 
 export function BookCard({ book, locale = "en" }: { book: Book; locale?: Locale }) {
-  const copy = getMessages(locale);
   return (
+    <Link
+      href={localizedPath(locale, `/books/${book.id}`)}
+    >
     <Card className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-lg">
       <div className="relative aspect-4/3 min-w-0 overflow-hidden bg-surface-muted">
         <Image
@@ -32,13 +34,8 @@ export function BookCard({ book, locale = "en" }: { book: Book; locale?: Locale 
         <h2 className="wrap-break-word text-lg font-bold leading-tight text-foreground sm:text-xl">
           {book.name}
         </h2>
-        <Link
-          href={localizedPath(locale, `/books/${book.id}`)}
-          className="mt-auto inline-flex w-fit max-w-full items-center gap-2 pt-3 text-xs font-bold uppercase tracking-[0.12em] text-accent transition-colors hover:text-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:text-sm sm:tracking-widest"
-        >
-          <span>{copy.viewDetails}</span> <FiArrowUpRight aria-hidden="true" />
-        </Link>
       </div>
     </Card>
+    </Link>
   );
 }

@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
-import { BookCard } from "@/components/BookCard";
-import { BookCollectionHeader } from "@/components/BookCollectionHeader";
-import { getBooksByCategory, searchBooks } from "@/lib/books";
+import { BookCollection } from "@/components/BookCollection";
+import { getBooksPage } from "@/lib/books";
 import { categoryLabel, getMessages, isLocale, locales, type Locale } from "@/lib/i18n";
 import { bookCategories, type BookCategory } from "@/types";
 
@@ -20,28 +19,25 @@ export default async function LocaleCategoryPage({
   searchParams,
 }: {
   params: Promise<{ locale: string; category: string }>;
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ page?: string; q?: string }>;
 }) {
   const { locale: value, category } = await params;
   if (!isLocale(value) || !isBookCategory(category)) notFound();
   const locale: Locale = value;
   const copy = getMessages(locale);
   const label = categoryLabel(locale, category);
-  const { q = "" } = await searchParams;
-  const books = searchBooks(getBooksByCategory(category), q, locale);
+  const { page, q = "" } = await searchParams;
+  const books = getBooksPage({ category, locale, page: Number(page), query: q });
 
   return (
-    <section className="flex min-w-0 flex-col gap-7 sm:gap-10">
-      <BookCollectionHeader eyebrow={copy.categoryEyebrow} title={label} description={copy.categoryDescription(label)} count={books.length} locale={locale} />
-      {books.length > 0 ? (
-        <div className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {books.map((book) => <BookCard key={book.id} book={book} locale={locale} />)}
-        </div>
-      ) : (
-        <p className="rounded-2xl border border-dashed border-border bg-surface-muted p-8 text-center text-muted">
-          {copy.noSearchResults(q)}
-        </p>
-      )}
-    </section>
+    <BookCollection
+      booksPage={books}
+      locale={locale}
+      eyebrow={copy.categoryEyebrow}
+      title={label}
+      description={copy.categoryDescription(label)}
+      query={q}
+      basePath={`/books/category/${category}`}
+    />
   );
 }

@@ -92,7 +92,7 @@ export function BooksNavigation({ locale }: { locale: Locale }) {
                     ref={active ? activeLinkRef : undefined}
                     aria-current={active ? "page" : undefined}
                     className={clsx(
-                      "block whitespace-nowrap rounded-xl px-3 py-2 text-sm font-semibold capitalize transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                      "block whitespace-nowrap rounded-xl px-3 py-0 text-sm font-semibold capitalize transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
                       active ? "bg-accent text-white shadow-sm" : "text-muted hover:bg-surface-muted hover:text-accent",
                     )}
                   >

@@ -1,12 +1,23 @@
-import booksData from "./data/books.json";
 import {
   bookCategories,
   type Book,
   type BookCategory,
+  type BooksPage,
 } from "../types";
+import { getDatabase } from "./database";
 import { categoryLabel, type Locale } from "./i18n";
 
 const categories = new Set<string>(bookCategories);
+const database = getDatabase();
+export const BOOKS_PAGE_SIZE = 12;
+
+type BooksPageOptions = {
+  category?: BookCategory;
+  locale: Locale;
+  page?: number;
+  pageSize?: number;
+  query?: string;
+};
 
 function isBook(value: unknown): value is Book {
   if (typeof value !== "object" || value === null) {
@@ -33,25 +44,95 @@ function isBook(value: unknown): value is Book {
   );
 }
 
-function loadBooks(): readonly Book[] {
-  if (!Array.isArray(booksData)) {
-    throw new Error("The books data must be an array.");
+function toBook(value: unknown): Book {
+  if (!isBook(value)) {
+    throw new Error("The database returned invalid book data.");
   }
 
-  return booksData.map((book, index) => {
-    if (!isBook(book)) {
-      throw new Error(`Invalid book data at index ${index}.`);
-    }
-
-    return book;
-  });
+  return value;
 }
 
-const books = loadBooks();
-console.log(`Loaded ${books.length} books from the data source.`);
+function escapeLikePattern(value: string): string {
+  return value.replace(/[\\%_]/g, "\\$&");
+}
+
+function normalizePage(value: number | undefined): number {
+  return Number.isInteger(value) && value && value > 0 ? value : 1;
+}
+
+function normalizePageSize(value: number | undefined): number {
+  return Number.isInteger(value) && value && value > 0
+    ? Math.min(value, 48)
+    : BOOKS_PAGE_SIZE;
+}
+
+function buildBookFilters({ category, locale, query }: BooksPageOptions) {
+  const filters: string[] = [];
+  const parameters: (string | number)[] = [];
+
+  if (category) {
+    filters.push("category = ?");
+    parameters.push(category);
+  }
+
+  const normalizedQuery = query?.trim().toLocaleLowerCase();
+  if (normalizedQuery) {
+    const searchPattern = `%${escapeLikePattern(normalizedQuery)}%`;
+    const matchingCategories = bookCategories.filter((bookCategory) =>
+      [bookCategory, categoryLabel(locale, bookCategory)].some((label) =>
+        label.toLocaleLowerCase().includes(normalizedQuery),
+      ),
+    );
+    const categorySearch = matchingCategories.length
+      ? ` OR category IN (${matchingCategories.map(() => "?").join(", ")})`
+      : "";
+
+    filters.push(
+      `(lower(name) LIKE ? ESCAPE '\\' OR lower(author) LIKE ? ESCAPE '\\'${categorySearch})`,
+    );
+    parameters.push(searchPattern, searchPattern, ...matchingCategories);
+  }
+
+  return {
+    clause: filters.length ? ` WHERE ${filters.join(" AND ")}` : "",
+    parameters,
+  };
+}
+
+export function getBooksPage(options: BooksPageOptions): BooksPage {
+  const page = normalizePage(options.page);
+  const pageSize = normalizePageSize(options.pageSize);
+  const { clause, parameters } = buildBookFilters(options);
+  const total = Number(
+    database.prepare(`SELECT COUNT(*) AS count FROM books${clause}`).get(...parameters)?.count ?? 0,
+  );
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const offset = (currentPage - 1) * pageSize;
+  const rows = database
+    .prepare(
+      `SELECT id, name, author, likes, image, category, date_added AS dateAdded
+       FROM books${clause} ORDER BY id LIMIT ? OFFSET ?`,
+    )
+    .all(...parameters, pageSize, offset);
+
+  return {
+    items: rows.map(toBook),
+    page: currentPage,
+    pageSize,
+    total,
+    totalPages,
+  };
+}
 
 export function getBooks(): Book[] {
-  return books.map((book) => ({ ...book }));
+  const rows = database
+    .prepare(
+      "SELECT id, name, author, likes, image, category, date_added AS dateAdded FROM books ORDER BY id",
+    )
+    .all();
+
+  return rows.map(toBook);
 }
 
 export function getBookById(id: number | string): Book | undefined {
@@ -61,14 +142,23 @@ export function getBookById(id: number | string): Book | undefined {
     return undefined;
   }
 
-  const book = books.find((item) => item.id === numericId);
-  return book ? { ...book } : undefined;
+  const row = database
+    .prepare(
+      "SELECT id, name, author, likes, image, category, date_added AS dateAdded FROM books WHERE id = ?",
+    )
+    .get(numericId);
+
+  return row ? toBook(row) : undefined;
 }
 
 export function getBooksByCategory(category: BookCategory): Book[] {
-  return books
-    .filter((book) => book.category === category)
-    .map((book) => ({ ...book }));
+  const rows = database
+    .prepare(
+      "SELECT id, name, author, likes, image, category, date_added AS dateAdded FROM books WHERE category = ? ORDER BY id",
+    )
+    .all(category);
+
+  return rows.map(toBook);
 }
 
 export function searchBooks(items: Book[], query: string, locale: Locale): Book[] {

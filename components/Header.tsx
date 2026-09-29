@@ -126,7 +126,7 @@ export function Header({ locale }: { locale: Locale }) {
     >
       <Disclosure
         as="div"
-        className="mx-auto max-w-7xl px-4 py-2 sm:px-6 sm:py-2.5 lg:px-8"
+        className="mx-auto max-w-7xl px-4 py-1.5 sm:px-6 sm:py-2 lg:px-8"
       >
         {({ open, close }) => (
           <>
@@ -141,7 +141,7 @@ export function Header({ locale }: { locale: Locale }) {
                   alt="Tiny Library"
                   width={200}
                   height={200}
-                  className="h-auto w-28"
+                  className="h-auto w-20 sm:w-24"
                   priority
                 />
               </Link>
