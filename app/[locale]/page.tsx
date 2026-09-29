@@ -42,7 +42,7 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
           <Card key={highlight.label} className="rounded-2xl">
             <CardContent className="flex items-center gap-4 p-5">
               <span className="rounded-xl bg-surface-muted p-3 text-xl text-accent"><highlight.icon aria-hidden="true" /></span>
-              <span className="flex flex-col gap-1"><strong className="text-2xl text-foreground">{highlight.value}</strong><span className="text-sm text-muted">{highlight.label}</span></span>
+              <span className="flex flex-col gap-1"><strong className="text-2xl text-foreground">{highlight.value}</strong><span className="text-sm text-muted capitalize tracking-wide leading-relaxed">{highlight.label}</span></span>
             </CardContent>
           </Card>
         ))}

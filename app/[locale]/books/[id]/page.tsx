@@ -5,7 +5,7 @@ import { FiArrowLeft, FiHeart } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getBookById } from "@/lib/books";
-import { getMessages, isLocale, localizedPath, type Locale } from "@/lib/i18n";
+import { categoryLabel, getMessages, isLocale, localizedPath, type Locale } from "@/lib/i18n";
 
 export default async function LocaleBookPage({
   params,
@@ -28,7 +28,7 @@ export default async function LocaleBookPage({
         <div className="grid gap-0 md:grid-cols-[0.8fr_1.2fr]">
           <div className="bg-surface-muted p-5 sm:p-8"><Image src={book.image} alt={locale === "ar" ? `غلاف كتاب ${book.name}` : `Cover of ${book.name}`} width={600} height={450} className="h-auto w-full rounded-2xl object-cover" unoptimized /></div>
           <CardContent className="flex flex-col gap-6 p-6 sm:p-10">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent">{book.category.replace("-", " ")}</span>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent">{categoryLabel(locale, book.category)}</span>
             <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">{book.name}</h1>
             <p className="text-xl text-muted">{locale === "ar" ? `بقلم ${book.author}` : `by ${book.author}`}</p>
             <div className="flex items-center gap-2 text-sm font-semibold text-muted"><FiHeart className="text-accent" /> {copy.readersLikeThis(book.likes)}</div>
