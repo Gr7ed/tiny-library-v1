@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { LocaleDocumentAttributes } from "@/app/components/LocaleDocumentAttributes";
-import { directionFor, isLocale, locales, type Locale } from "@/app/i18n";
+import { LocaleDocumentAttributes } from "@/components/LocaleDocumentAttributes";
+import { directionFor, isLocale, locales, type Locale } from "@/lib/i18n";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

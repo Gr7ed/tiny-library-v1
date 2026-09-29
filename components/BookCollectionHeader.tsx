@@ -1,5 +1,5 @@
-import { Card, CardContent } from "@/app/components/ui/card";
-import { getMessages, type Locale } from "@/app/i18n";
+import { Card, CardContent } from "@/components/ui/card";
+import { getMessages, type Locale } from "@/lib/i18n";
 
 type BookCollectionHeaderProps = {
   eyebrow: string;

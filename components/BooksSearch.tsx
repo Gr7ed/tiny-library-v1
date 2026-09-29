@@ -2,8 +2,8 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FiSearch } from "react-icons/fi";
-import { getMessages, type Locale } from "@/app/i18n";
-import { Input } from "@/app/components/ui/input";
+import { getMessages, type Locale } from "@/lib/i18n";
+import { Input } from "@/components/ui/input";
 
 export function BooksSearch({ locale }: { locale: Locale }) {
   const router = useRouter();

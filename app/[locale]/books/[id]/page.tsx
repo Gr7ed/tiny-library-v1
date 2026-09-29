@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FiArrowLeft, FiHeart } from "react-icons/fi";
-import { Button } from "@/app/components/ui/button";
-import { Card, CardContent } from "@/app/components/ui/card";
-import { getBookById } from "@/app/lib/books";
-import { getMessages, isLocale, localizedPath, type Locale } from "@/app/i18n";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { getBookById } from "@/lib/books";
+import { getMessages, isLocale, localizedPath, type Locale } from "@/lib/i18n";
 
 export default async function LocaleBookPage({
   params,

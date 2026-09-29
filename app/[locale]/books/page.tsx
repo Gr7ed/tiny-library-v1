@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import { BookCard } from "@/app/components/BookCard";
-import { BookCollectionHeader } from "@/app/components/BookCollectionHeader";
-import { getBooks, searchBooks } from "@/app/lib/books";
-import { getMessages, isLocale, type Locale } from "@/app/i18n";
+import { BookCard } from "@/components/BookCard";
+import { BookCollectionHeader } from "@/components/BookCollectionHeader";
+import { getBooks, searchBooks } from "@/lib/books";
+import { getMessages, isLocale, type Locale } from "@/lib/i18n";
 
 export default async function LocaleBooksPage({
   params,

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FiHeart, FiArrowUpRight } from "react-icons/fi";
-import { Card } from "@/app/components/ui/card";
-import { categoryLabel, getMessages, localizedPath, type Locale } from "@/app/i18n";
-import type { Book } from "@/app/types";
+import { Card } from "@/components/ui/card";
+import { categoryLabel, getMessages, localizedPath, type Locale } from "@/lib/i18n";
+import type { Book } from "@/types";
 
 export function BookCard({ book, locale = "en" }: { book: Book; locale?: Locale }) {
   const copy = getMessages(locale);

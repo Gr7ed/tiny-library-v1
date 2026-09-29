@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FiGrid } from "react-icons/fi";
-import { bookCategories } from "@/app/types";
-import { categoryLabel, getMessages, localizedPath, type Locale } from "@/app/i18n";
+import { bookCategories } from "@/types";
+import { categoryLabel, getMessages, localizedPath, type Locale } from "@/lib/i18n";
 
 export function BooksNavigation({ locale }: { locale: Locale }) {
   const pathname = usePathname();

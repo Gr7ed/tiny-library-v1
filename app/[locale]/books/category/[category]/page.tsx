@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import { BookCard } from "@/app/components/BookCard";
-import { BookCollectionHeader } from "@/app/components/BookCollectionHeader";
-import { getBooksByCategory, searchBooks } from "@/app/lib/books";
-import { categoryLabel, getMessages, isLocale, locales, type Locale } from "@/app/i18n";
-import { bookCategories, type BookCategory } from "@/app/types";
+import { BookCard } from "@/components/BookCard";
+import { BookCollectionHeader } from "@/components/BookCollectionHeader";
+import { getBooksByCategory, searchBooks } from "@/lib/books";
+import { categoryLabel, getMessages, isLocale, locales, type Locale } from "@/lib/i18n";
+import { bookCategories, type BookCategory } from "@/types";
 
 function isBookCategory(value: string): value is BookCategory {
   return bookCategories.includes(value as BookCategory);

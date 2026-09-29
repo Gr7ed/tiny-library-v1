@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { Lato, Noto_Kufi_Arabic, Nunito_Sans } from "next/font/google";
-import { Footer } from "./components/Footer";
-import { Header } from "./components/Header";
-import { directionFor, type Locale } from "./i18n";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { directionFor, type Locale } from "@/lib/i18n";
 import "./globals.css";
 
 const lato = Lato({

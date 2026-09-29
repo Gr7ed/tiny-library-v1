@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { FiArrowUpRight, FiMail } from "react-icons/fi";
 import { notFound } from "next/navigation";
-import { Button } from "@/app/components/ui/button";
-import { Card, CardContent } from "@/app/components/ui/card";
-import { getMessages, isLocale, type Locale } from "@/app/i18n";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { getMessages, isLocale, type Locale } from "@/lib/i18n";
 
 export default async function LocaleContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: value } = await params;

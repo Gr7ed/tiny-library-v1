@@ -1,10 +1,10 @@
-import booksData from "../data/books.json";
+import booksData from "./data/books.json";
 import {
   bookCategories,
   type Book,
   type BookCategory,
 } from "../types";
-import { categoryLabel, type Locale } from "../i18n";
+import { categoryLabel, type Locale } from "./i18n";
 
 const categories = new Set<string>(bookCategories);
 

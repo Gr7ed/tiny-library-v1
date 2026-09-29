@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiBookOpen, FiHeart, FiSearch } from "react-icons/fi";
 import { notFound } from "next/navigation";
-import { Button } from "@/app/components/ui/button";
-import { Card, CardContent } from "@/app/components/ui/card";
-import { getMessages, isLocale, localizedPath, type Locale } from "@/app/i18n";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { getMessages, isLocale, localizedPath, type Locale } from "@/lib/i18n";
 
 export default async function LocaleHomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: value } = await params;

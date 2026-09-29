@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { cn } from "@/app/lib/utils";
+import { cn } from "@/lib/utils";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   asChild?: boolean;

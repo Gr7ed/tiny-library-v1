@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { directionFor, type Locale } from "@/app/i18n";
+import { directionFor, type Locale } from "@/lib/i18n";
 
 export function LocaleDocumentAttributes({ locale }: { locale: Locale }) {
   useEffect(() => {
