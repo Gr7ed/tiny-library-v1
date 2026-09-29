@@ -30,6 +30,9 @@ export function getDatabase(): DatabaseSync {
 }
 
 function seedBooks(database: DatabaseSync): void {
+  const initialCount = Number(
+    database.prepare("SELECT COUNT(*) AS count FROM books").get()?.count,
+  );
   const insertBook = database.prepare(`
     INSERT OR IGNORE INTO books
       (id, name, author, likes, image, category, date_added)
@@ -57,10 +60,11 @@ function seedBooks(database: DatabaseSync): void {
     throw error;
   }
 
-//   const seededCount = Number(
-//     database.prepare("SELECT COUNT(*) AS count FROM books").get()?.count,
-//   );
-//   console.log(
-//     `[books] SQLite database ready: ${seededCount} books (${insertedCount} seeded).`,
-//   );
+  const seededCount = Number(
+    database.prepare("SELECT COUNT(*) AS count FROM books").get()?.count,
+  );
+  const insertedCount = seededCount - initialCount;
+  console.log(
+    `[books] SQLite database ready: ${seededCount} books (${insertedCount} seeded).`,
+  );
 }
