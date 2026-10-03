@@ -50,4 +50,14 @@ describe("book data access", () => {
     expect(page.items).toHaveLength(Math.min(2, page.total));
     expect(page.items.every((book) => book.category === "fiction")).toBe(true);
   });
+
+  it("orders pages by the requested sort", () => {
+    const byLikes = getBooksPage({ locale: "en", pageSize: 3, sort: "likes" });
+    const byTitle = getBooksPage({ locale: "en", pageSize: 3, sort: "alpha" });
+
+    expect(byLikes.items[0].likes).toBeGreaterThanOrEqual(byLikes.items[1].likes);
+    expect(byTitle.items.map((book) => book.name)).toEqual(
+      [...byTitle.items].sort((first, second) => first.name.localeCompare(second.name)).map((book) => book.name),
+    );
+  });
 });

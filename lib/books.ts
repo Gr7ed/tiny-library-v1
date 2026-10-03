@@ -2,6 +2,7 @@ import {
   bookCategories,
   type Book,
   type BookCategory,
+  type BookSort,
   type BooksPage,
 } from "../types";
 import { getDatabase } from "./database";
@@ -17,6 +18,7 @@ type BooksPageOptions = {
   page?: number;
   pageSize?: number;
   query?: string;
+  sort?: BookSort;
 };
 
 function isBook(value: unknown): value is Book {
@@ -66,6 +68,19 @@ function normalizePageSize(value: number | undefined): number {
     : BOOKS_PAGE_SIZE;
 }
 
+function orderByFor(sort: BookSort = "default"): string {
+  switch (sort) {
+    case "alpha":
+      return "name ASC";
+    case "likes":
+      return "likes DESC, id ASC";
+    case "newest":
+      return "date_added DESC, id DESC";
+    default:
+      return "id ASC";
+  }
+}
+
 function buildBookFilters({ category, locale, query }: BooksPageOptions) {
   const filters: string[] = [];
   const parameters: (string | number)[] = [];
@@ -112,7 +127,7 @@ export function getBooksPage(options: BooksPageOptions): BooksPage {
   const rows = database
     .prepare(
       `SELECT id, name, author, likes, image, category, date_added AS dateAdded
-       FROM books${clause} ORDER BY id LIMIT ? OFFSET ?`,
+      FROM books${clause} ORDER BY ${orderByFor(options.sort)} LIMIT ? OFFSET ?`,
     )
     .all(...parameters, pageSize, offset);
 

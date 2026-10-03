@@ -3,6 +3,7 @@ import { BookCollectionHeader } from "@/components/BookCollectionHeader";
 import { BookPagination } from "@/components/BookPagination";
 import { getMessages, type Locale } from "@/lib/i18n";
 import type { BooksPage } from "@/types";
+import type { BookSort } from "@/types";
 
 type BookCollectionProps = {
   booksPage: BooksPage;
@@ -12,6 +13,7 @@ type BookCollectionProps = {
   description: string;
   query: string;
   basePath: string;
+  sort?: BookSort;
 };
 
 export function BookCollection({
@@ -22,6 +24,7 @@ export function BookCollection({
   description,
   query,
   basePath,
+  sort,
 }: BookCollectionProps) {
   const copy = getMessages(locale);
   const { items: books } = booksPage;
@@ -52,6 +55,7 @@ export function BookCollection({
           locale={locale}
           page={booksPage.page}
           query={query}
+          sort={sort}
           totalPages={booksPage.totalPages}
         />
       ) : null}

@@ -14,16 +14,11 @@ export function BooksSearch({ locale }: { locale: Locale }) {
   const query = searchParams.get("q") ?? "";
   const ref = useRef<HTMLInputElement>(null);
 
-  const pathSegments = pathname.split("/").filter(Boolean);
-  const isBookDetailPage = pathSegments[1] === "books" && pathSegments.length === 3;
-
   useEffect(() => {
     if (ref.current) {
       ref.current?.focus();
     }
   }, [query]);
-
-  if (isBookDetailPage) return null;
 
   function updateQuery(value: string) {
     const params = new URLSearchParams(searchParams.toString());

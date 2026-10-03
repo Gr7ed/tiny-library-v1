@@ -11,6 +11,8 @@ export const bookCategories = [
 ] as const;
 
 export type BookCategory = (typeof bookCategories)[number];
+export const bookSorts = ["default", "alpha", "likes", "newest"] as const;
+export type BookSort = (typeof bookSorts)[number];
 export type CategoryPageProps = {
   params: Promise<{ category: string }>;
 };
