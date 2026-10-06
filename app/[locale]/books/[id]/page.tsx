@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getBookById } from "@/lib/books";
 import { categoryLabel, getMessages, isLocale, localizedPath, type Locale } from "@/lib/i18n";
+import { delayForLoadingUi } from "@/lib/loading-delay";
 
 export default async function LocaleBookPage({
   params,
@@ -16,6 +17,7 @@ export default async function LocaleBookPage({
   if (!isLocale(value)) notFound();
   const locale: Locale = value;
   const copy = getMessages(locale);
+  await delayForLoadingUi();
   const book = getBookById(id);
   if (!book) notFound();
 

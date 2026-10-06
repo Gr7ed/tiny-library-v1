@@ -60,6 +60,10 @@ export const messages = {
     openMenu: "Open navigation menu",
     closeMenu: "Close navigation menu",
     switchLanguage: "العربية",
+    loading: "Loading",
+    notFoundTitle: "Page not found",
+    notFoundDescription: "The page you are looking for does not exist or is no longer available.",
+    returnHome: "Return home",
   },
   ar: {
     siteName: "المكتبة الصغيرة",
@@ -107,6 +111,10 @@ export const messages = {
     openMenu: "فتح قائمة التنقل",
     closeMenu: "إغلاق قائمة التنقل",
     switchLanguage: "English",
+    loading: "جار التحميل",
+    notFoundTitle: "الصفحة غير موجودة",
+    notFoundDescription: "الصفحة التي تبحث عنها غير موجودة أو لم تعد متاحة.",
+    returnHome: "العودة إلى الرئيسية",
   },
 } as const;
 

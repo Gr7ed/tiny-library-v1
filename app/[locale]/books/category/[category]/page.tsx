@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
-import { BookCollection } from "@/components/BookCollection";
+import { BooksCollection } from "@/components/BooksCollection";
 import { getBooksPage } from "@/lib/books";
 import { categoryLabel, getMessages, isLocale, locales, type Locale } from "@/lib/i18n";
+import { delayForLoadingUi } from "@/lib/loading-delay";
 import { bookCategories, bookSorts, type BookCategory, type BookSort } from "@/types";
 
 function isBookCategory(value: string): value is BookCategory {
@@ -30,17 +31,22 @@ export default async function LocaleCategoryPage({
   const sort: BookSort = bookSorts.includes(requestedSort as BookSort)
     ? (requestedSort as BookSort)
     : "default";
+  await delayForLoadingUi();
   const books = getBooksPage({ category, locale, page: Number(page), query: q, sort });
 
   return (
-    <BookCollection
-      booksPage={books}
+    <BooksCollection
+      books={books.items.map((book) => ({ ...book }))}
       locale={locale}
       eyebrow={copy.categoryEyebrow}
       title={label}
       description={copy.categoryDescription(label)}
-      query={q}
+      search={q}
+      categoryName={label}
       basePath={`/books/category/${category}`}
+      page={books.page}
+      total={books.total}
+      totalPages={books.totalPages}
       sort={sort}
     />
   );
