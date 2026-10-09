@@ -1,5 +1,5 @@
-import { BookCollectionLoading } from "@/components/BookCollectionLoading";
+import { LoadingUI } from "@/components/LoadingUI";
 
 export default function Loading() {
-  return <BookCollectionLoading />;
+  return <LoadingUI variant="collection" />;
 }

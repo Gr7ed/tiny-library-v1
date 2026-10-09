@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
-import { BooksCollection } from "@/components/BooksCollection";
+import { BooksBrowser } from "@/components/BooksBrowser";
 import { getBooksPage } from "@/lib/books";
 import { getMessages, isLocale, type Locale } from "@/lib/i18n";
-import { delayForLoadingUi } from "@/lib/loading-delay";
 import { bookSorts, type BookSort } from "@/types";
 
 export default async function LocaleBooksPage({
@@ -20,11 +19,10 @@ export default async function LocaleBooksPage({
   const sort: BookSort = bookSorts.includes(requestedSort as BookSort)
     ? (requestedSort as BookSort)
     : "default";
-  await delayForLoadingUi();
   const books = getBooksPage({ locale, page: Number(page), query: q, sort });
 
   return (
-    <BooksCollection
+    <BooksBrowser
       books={books.items.map((book) => ({ ...book }))}
       locale={locale}
       eyebrow={copy.collectionEyebrow}

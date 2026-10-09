@@ -7,10 +7,10 @@ import {
 } from "../types";
 import { getDatabase } from "./database";
 import { categoryLabel, type Locale } from "./i18n";
+import { BOOKS_PAGE_SIZE } from "./constants";
 
 const categories = new Set<string>(bookCategories);
 const database = getDatabase();
-export const BOOKS_PAGE_SIZE = 12;
 
 type BooksPageOptions = {
   category?: BookCategory;
