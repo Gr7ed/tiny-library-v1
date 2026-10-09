@@ -1,9 +1,8 @@
 type LoadingUIProps = {
-  variant: "category" | "collection" | "detail";
+  variant: "collection" | "detail";
 };
 
 const loadingLabels = {
-  category: "Loading book category",
   collection: "Loading book collection",
   detail: "Loading book details",
 } as const;
