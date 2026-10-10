@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiArrowUpRight } from "react-icons/fi";
-import { getMessages, localizedPath, type Locale } from "@/lib/i18n";
+import { getMessages, localizedPath } from "@/lib/i18n";
+import type { Locale } from "@/types";
 
 export function Footer({ locale }: { locale: Locale }) {
   const pathname = usePathname();

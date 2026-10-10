@@ -7,8 +7,7 @@ import { BookPagination } from "@/components/BookPagination";
 import { BooksCollection } from "@/components/BooksCollection";
 import { BooksSearch } from "@/components/BooksSearch";
 import { SortControls } from "@/components/SortControls";
-import { type Locale } from "@/lib/i18n";
-import { bookSorts, type Book, type BookSort } from "@/types";
+import { bookSorts, type Book, type BookSort, type Locale } from "@/types";
 
 type BooksBrowserProps = {
   books: Book[];

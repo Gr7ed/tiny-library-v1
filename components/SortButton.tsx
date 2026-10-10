@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/utils";
 import type { BookSort } from "@/types";
 
 type SortButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

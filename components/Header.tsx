@@ -12,7 +12,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
-import { alternateLocale, getMessages, localizedPath, type Locale } from "@/lib/i18n";
+import { alternateLocale, getMessages, localizedPath } from "@/lib/i18n";
+import type { Locale } from "@/types";
 
 function isActiveRoute(pathname: string, href: string, locale: Locale) {
   const localized = localizedPath(locale, href);

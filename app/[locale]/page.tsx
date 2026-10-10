@@ -4,7 +4,8 @@ import { FiArrowRight, FiBookOpen, FiHeart, FiSearch } from "react-icons/fi";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getMessages, isLocale, localizedPath, type Locale } from "@/lib/i18n";
+import { getMessages, isLocale, localizedPath } from "@/lib/i18n";
+import type { Locale } from "@/types";
 
 export default async function LocaleHomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: value } = await params;

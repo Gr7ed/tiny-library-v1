@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { NotFoundState } from "@/components/NotFoundState";
-import { isLocale, localizedPath, type Locale } from "@/lib/i18n";
+import { isLocale, localizedPath } from "@/lib/i18n";
+import type { Locale } from "@/types";
 
 export default async function NotFound() {
   const value = (await headers()).get("x-locale");

@@ -1,5 +1,6 @@
 import { NotFoundState } from "@/components/NotFoundState";
-import { getMessages, isLocale, type Locale, localizedPath } from "@/lib/i18n";
+import { getMessages, isLocale, localizedPath } from "@/lib/i18n";
+import type { Locale } from "@/types";
 import { headers } from "next/headers";
 
 export default async function NotFound() {

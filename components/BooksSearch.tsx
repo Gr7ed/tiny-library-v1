@@ -1,7 +1,8 @@
 "use client";
 
 import { FiSearch } from "react-icons/fi";
-import { getMessages, type Locale } from "@/lib/i18n";
+import { getMessages } from "@/lib/i18n";
+import type { Locale } from "@/types";
 import { Input } from "@/components/ui/input";
 import { useEffect, useRef } from "react";
 

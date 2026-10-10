@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiHeart } from "react-icons/fi";
 import { Card } from "@/components/ui/card";
-import { categoryLabel, localizedPath, type Locale } from "@/lib/i18n";
-import type { Book } from "@/types";
+import { categoryLabel, localizedPath } from "@/lib/i18n";
+import type { Book, Locale } from "@/types";
 
 export function BookCard({ book, locale = "en" }: { book: Book; locale?: Locale }) {
   return (

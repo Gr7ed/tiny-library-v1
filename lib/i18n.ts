@@ -1,5 +1,4 @@
-export const locales = ["en", "ar"] as const;
-export type Locale = (typeof locales)[number];
+import { locales, type Locale } from "../types";
 
 export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);

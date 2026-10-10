@@ -1,8 +1,8 @@
 "use client";
 
 import { BookCard } from "@/components/BookCard";
-import { getMessages, type Locale } from "@/lib/i18n";
-import type { Book } from "@/types";
+import { getMessages } from "@/lib/i18n";
+import type { Book, Locale } from "@/types";
 
 type BooksCollectionProps = {
   books: Book[];

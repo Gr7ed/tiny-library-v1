@@ -3,23 +3,16 @@ import {
   type Book,
   type BookCategory,
   type BookSort,
+  type BooksPageOptions,
   type BooksPage,
+  type Locale,
 } from "../types";
 import { getDatabase } from "./database";
-import { categoryLabel, type Locale } from "./i18n";
+import { categoryLabel } from "./i18n";
 import { BOOKS_PAGE_SIZE } from "./constants";
 
 const categories = new Set<string>(bookCategories);
 const database = getDatabase();
-
-type BooksPageOptions = {
-  category?: BookCategory;
-  locale: Locale;
-  page?: number;
-  pageSize?: number;
-  query?: string;
-  sort?: BookSort;
-};
 
 function isBook(value: unknown): value is Book {
   if (typeof value !== "object" || value === null) {

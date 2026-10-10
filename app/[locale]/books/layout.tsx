@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { BooksNavigation } from "@/components/BooksNavigation";
-import { isLocale, type Locale } from "@/lib/i18n";
+import { isLocale } from "@/lib/i18n";
+import type { Locale } from "@/types";
 
 export default async function LocaleBooksLayout({
   children,

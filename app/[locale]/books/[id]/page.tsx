@@ -5,7 +5,8 @@ import { FiArrowLeft, FiHeart } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getBookById } from "@/lib/books";
-import { categoryLabel, getMessages, isLocale, localizedPath, type Locale } from "@/lib/i18n";
+import { categoryLabel, getMessages, isLocale, localizedPath } from "@/lib/i18n";
+import type { Locale } from "@/types";
 
 export default async function LocaleBookPage({
   params,

@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import { getMessages, localizedPath, type Locale } from "@/lib/i18n";
-import type { BookSort } from "@/types";
+import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
+import { PaginationButton } from "@/components/PaginationButton";
+import { getMessages, localizedPath } from "@/lib/i18n";
+import type { BookSort, Locale } from "@/types";
 
 type BookPaginationProps = {
   basePath: string;
@@ -21,6 +21,22 @@ function pageHref(locale: Locale, basePath: string, page: number, query: string,
   return `${localizedPath(locale, basePath)}${search ? `?${search}` : ""}`;
 }
 
+function getPageNumbers(page: number, totalPages: number) {
+  if (totalPages <= 3) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  if (page === 1) {
+    return [1, 2, totalPages];
+  }
+
+  if (page === totalPages) {
+    return [1, totalPages - 1, totalPages];
+  }
+
+  return [...new Set([1, page - 1, page, page + 1, totalPages])];
+}
+
 export function BookPagination({
   basePath,
   locale,
@@ -30,36 +46,31 @@ export function BookPagination({
   totalPages,
 }: BookPaginationProps) {
   const copy = getMessages(locale);
-  const previousPage = page - 1;
-  const nextPage = page + 1;
+  const pageNumbers = getPageNumbers(page, totalPages);
 
   return (
-    <nav className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-5" aria-label={copy.collection}>
-      {previousPage > 0 ? (
-        <Link
-          href={pageHref(locale, basePath, previousPage, query, sort)}
-          className="inline-flex items-center gap-2 rounded-xl border border-border px-3 py-2 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          <FiArrowLeft aria-hidden="true" className="rtl:rotate-180" />
-          {copy.previousPage}
-        </Link>
-      ) : (
-        <span />
-      )}
-      <span className="text-sm font-semibold text-muted" aria-current="page">
-        {copy.pageOf(page, totalPages)}
-      </span>
-      {nextPage <= totalPages ? (
-        <Link
-          href={pageHref(locale, basePath, nextPage, query, sort)}
-          className="inline-flex items-center gap-2 rounded-xl border border-border px-3 py-2 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          {copy.nextPage}
-          <FiArrowRight aria-hidden="true" className="rtl:rotate-180" />
-        </Link>
-      ) : (
-        <span />
-      )}
+    <nav
+      className="flex justify-center border-t border-border pt-5"
+      aria-label={copy.collection}
+    >
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        {pageNumbers.map((pageNumber) => (
+          <PaginationButton
+            key={pageNumber}
+            href={pageHref(locale, basePath, pageNumber, query, sort)}
+            active={pageNumber === page}
+            aria-label={copy.pageOf(pageNumber, totalPages)}
+          >
+            {pageNumber === 1 && page !== pageNumber && totalPages > 1 ? (
+              <FiChevronsLeft aria-hidden="true" className="rtl:rotate-180" />
+            ) : pageNumber === totalPages && page !== pageNumber && totalPages > 1 ? (
+              <FiChevronsRight aria-hidden="true" className="rtl:rotate-180" />
+            ) : (
+              pageNumber
+            )}
+          </PaginationButton>
+        ))}
+      </div>
     </nav>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { getMessages, type Locale } from "@/lib/i18n";
-import { bookSorts, type BookSort } from "@/types";
+import { getMessages } from "@/lib/i18n";
+import { bookSorts, type BookSort, type Locale } from "@/types";
 import { SortButton } from "@/components/SortButton";
 
 type SortControlsProps = {

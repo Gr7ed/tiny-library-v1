@@ -1,18 +1,19 @@
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import { BooksBrowser } from "@/components/BooksBrowser";
 import { getBooksPage } from "@/lib/books";
-import { getMessages, isLocale, type Locale } from "@/lib/i18n";
-import { bookSorts, type BookSort } from "@/types";
+import { getSafeBooksQuery } from "@/lib/books-route";
+import { getMessages, isLocale } from "@/lib/i18n";
+import { bookSorts, type BookSort, type BooksSearchParams, type Locale } from "@/types";
 
 export default async function LocaleBooksPage({
   params,
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ page?: string; q?: string; sort?: string }>;
+  searchParams: Promise<BooksSearchParams>;
 }) {
   const { locale: value } = await params;
-  if (!isLocale(value)) notFound();
+  if (!isLocale(value)) redirect("/en/books");
   const locale: Locale = value;
   const copy = getMessages(locale);
   const { page, q = "", sort: requestedSort } = await searchParams;
@@ -20,6 +21,15 @@ export default async function LocaleBooksPage({
     ? (requestedSort as BookSort)
     : "default";
   const books = getBooksPage({ locale, page: Number(page), query: q, sort });
+  const safeQuery = getSafeBooksQuery({
+    page,
+    q,
+    sort: requestedSort,
+    totalPages: books.totalPages,
+  });
+  if (safeQuery !== null) {
+    redirect(`/${locale}/books${safeQuery ? `?${safeQuery}` : ""}`);
+  }
 
   return (
     <BooksBrowser
